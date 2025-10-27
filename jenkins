@@ -1,32 +1,30 @@
 pipeline {
-    agent { label 'A_Agent' }  // Run this pipeline only on the slave node labeled 'slave_1'
+    agent { label 'slave1' }
 
     stages {
         stage('Checkout Code') {
             steps {
-                echo 'Cloning code from GitHub repository...'
-                git branch: 'main', url: 'https://github.com/Komakulakavya/master_slave_architecture.git'
+                git branch: 'main', url: 'https://github.com/<your-username>/<your-repo>.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Compiling Java program...'
-                sh 'javac HelloWorld.java'
+                bat 'javac HelloWorld.java'
             }
         }
 
         stage('Run') {
             steps {
-                echo 'Running the Java program...'
-                sh 'java HelloWorld'
+                bat 'java HelloWorld'
             }
         }
 
         stage('Post-Build') {
             steps {
-                echo 'Build executed successfully on slave_1!'
+                echo 'Build executed successfully on Windows slave.'
             }
         }
     }
 }
+
